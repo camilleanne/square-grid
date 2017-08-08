@@ -1,6 +1,6 @@
 {
   "name": "square-sample-grid",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "creates a square sampling grid that fits within a given polygon",
   "main": "index.js",
   "directories": {
@@ -9,6 +9,10 @@
   "scripts": {
     "test": "node ./test/*.test.js",
     "bench": "node ./test/*.benchmark.js"
+  },
+   "repository": {
+    "type": "git",
+    "url": "git://github.com/camilleanne/square-grid.git"
   },
   "keywords": [
     "grid",

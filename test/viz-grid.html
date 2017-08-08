@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Square Grid quick viz</title>
+  <link rel="stylesheet" href="index.css">
+  <script>
+
+  window.onload = draw;
+
+  function draw() {
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var polygon = [];
+    var grid = [];
+
+    // polygon
+    ctx.fillStyle = "#F9A520";
+    ctx.beginPath();
+    for (var x = 0; x < polygon.length; x++) {
+      var coords = polygon[x];
+      ctx.lineTo(coords[0], coords[1]);
+    }
+    ctx.lineTo(polygon[0][0], polygon[0][1]);
+    ctx.stroke();
+    ctx.fill();
+
+    // sample grid
+    for (var x = 0; x < grid.length; x++){
+      ctx.beginPath();
+      for (var y = 0; y < grid[x].length; y++) {
+        var coords = grid[x][y];
+        ctx.lineTo(coords[0], coords[1]);
+      }
+      ctx.lineTo(grid[x][0][0], grid[x][0][1]);
+      ctx.stroke();
+    }
+  }
+  </script>
+</head>
+
+<body>
+<div id="wrapper">
+  <canvas id="canvas" width="1200" height="800"></canvas>
+</div>
+</body>
+</html>

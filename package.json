@@ -1,0 +1,29 @@
+{
+  "name": "square-sample-grid",
+  "version": "0.0.0",
+  "description": "creates a square sampling grid that fits within a given polygon",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node ./test/*.test.js",
+    "bench": "node ./test/*.benchmark.js"
+  },
+  "keywords": [
+    "grid",
+    "sampling",
+    "grid",
+    "polygon",
+    "euclidean"
+  ],
+  "author": "Camille Teicheira",
+  "license": "MIT",
+  "dependencies": {
+    "robust-point-in-polygon": "~1.0.3"
+  },
+  "devDependencies": {
+    "benchmark": "^2.1.4",
+    "tap": "^10.7.1"
+  }
+}

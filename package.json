@@ -1,6 +1,6 @@
 {
   "name": "square-sample-grid",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "creates a square sampling grid that fits within a given polygon",
   "main": "index.js",
   "directories": {

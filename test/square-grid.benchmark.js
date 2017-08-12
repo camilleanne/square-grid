@@ -4,18 +4,20 @@ var suite = new Benchmark.Suite;
 var grid = require('../index.js');
 var fixtures = require('./square-grid.fixture.json');
 
+var minSamples = 100;
+
 suite.add('simple polygon', function() {
   grid(fixtures.simple.polygon, fixtures.simple.cellSize);
-})
+}, {minSamples: minSamples})
 .add('complex polygon', function() {
   grid(fixtures.complex.polygon, fixtures.complex.cellSize);
-})
+}, {minSamples: minSamples})
 .add('simple polygon - noclip', function() {
   grid(fixtures.simple.polygon, fixtures.simple.cellSize, true);
-})
+}, {minSamples: minSamples})
 .add('complex polygon - noclip', function() {
   grid(fixtures.complex.polygon, fixtures.complex.cellSize, true);
-})
+}, {minSamples: minSamples})
 .on('cycle', function(event) {
   console.log(String(event.target));
 })

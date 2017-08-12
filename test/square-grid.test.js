@@ -1,7 +1,7 @@
 var test = require('tap').test;
 
-var grid = require('../src/grid-bbox.js');
-var fixtures = require('./grid-box.fixture.json');
+var grid = require('../index.js');
+var fixtures = require('./square-grid.fixture.json');
 
 test('grid fails without correct input', function (t) {
   t.throws(function() { grid(null, null) }, new Error('polygon is required'));

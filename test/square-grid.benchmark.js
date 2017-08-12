@@ -1,8 +1,8 @@
 var Benchmark = require('benchmark');
 var suite = new Benchmark.Suite;
 
-var grid = require('../src/grid-bbox.js');
-var fixtures = require('./grid-box.fixture.json');
+var grid = require('../index.js');
+var fixtures = require('./square-grid.fixture.json');
 
 suite.add('simple polygon', function() {
   grid(fixtures.simple.polygon, fixtures.simple.cellSize);

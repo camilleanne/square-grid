@@ -21,10 +21,15 @@ npm install square-sample-grid
 ```
 
 ### usage
-```
+```javascript
 var grid = require('square-sample-grid');
 
 var sampleGrid = grid([[20, 20],[60, 20],[80, 40],[10, 40]], 20, false);
+//  [
+//     [[60, 40],[60, 20],[40, 20],[40, 40]],
+//     [[40, 40],[40, 20],[20, 20],[20, 40]]
+//   ]
+
 ```
 
 To Do:

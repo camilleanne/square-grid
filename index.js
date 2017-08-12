@@ -1,4 +1,6 @@
-var pip = require('robust-point-in-polygon');
+'use strict';
+
+const pip = require('robust-point-in-polygon');
 
 /**
  * This function was borrowed and modified from
@@ -22,41 +24,41 @@ var pip = require('robust-point-in-polygon');
  */
 
 module.exports = function squareGrid(polygon, cellSize, noClip) {
-  var results = [];
+  const results = [];
 
   // validation
   if (!polygon) throw new Error('polygon is required');
   if (!Array.isArray(polygon) || !polygon.length) throw new Error('polygon must be an array of vertices');
   if (!cellSize) throw new Error('cellSize is required');
-  var bbox = makeBbox(polygon); // Convert polygon to bbox
+  const bbox = makeBbox(polygon); // Convert polygon to bbox
 
-  var west = bbox[0];
-  var south = bbox[1];
-  var east = bbox[2];
-  var north = bbox[3];
+  const west = bbox[0];
+  const south = bbox[1];
+  const east = bbox[2];
+  const north = bbox[3];
 
   // distance
-  var xDistance = distance(west, east);
-  var yDistance = distance(south, north);
+  const xDistance = distance(west, east);
+  const yDistance = distance(south, north);
 
   // rows & columns
-  var columns = Math.ceil(xDistance / cellSize);
-  var rows = Math.ceil(yDistance / cellSize);
+  const columns = Math.ceil(xDistance / cellSize);
+  const rows = Math.ceil(yDistance / cellSize);
 
   // columns | width | x
-  var xFraction = cellSize / xDistance;
-  var cellWidth = xFraction * (east - west);
+  const xFraction = cellSize / xDistance;
+  const cellWidth = xFraction * (east - west);
 
   // rows | height | y
-  var yFraction = cellSize / yDistance;
-  var cellHeight = yFraction * (north - south);
+  const yFraction = cellSize / yDistance;
+  const cellHeight = yFraction * (north - south);
 
   // iterate over columns & rows
-  var currentX = west;
-  for (var column = 0; column < columns; column++) {
-    var currentY = south;
-    for (var row = 0; row < rows; row++) {
-      var cellPoly = [
+  let currentX = west;
+  for (let column = 0; column < columns; column++) {
+    let currentY = south;
+    for (let row = 0; row < rows; row++) {
+      const cellPoly = [
         [currentX, currentY],
         [currentX, currentY + cellHeight],
         [currentX + cellWidth, currentY + cellHeight],
@@ -78,9 +80,9 @@ function distance (from, to) {
 }
 
 function makeBbox (array) {
-  var bbox = [-Infinity, -Infinity, Infinity, Infinity];
-  for (var i = 0; i < array.length; i ++) {
-    var coord = array[i];
+  const bbox = [-Infinity, -Infinity, Infinity, Infinity];
+  for (let i = 0; i < array.length; i ++) {
+    const coord = array[i];
     if (bbox[0] < coord[0]) bbox[0] = coord[0];
     if (bbox[1] < coord[1]) bbox[1] = coord[1];
     if (bbox[2] > coord[0]) bbox[2] = coord[0];
@@ -92,12 +94,12 @@ function makeBbox (array) {
 function calculateIntersections(polygon, array) {
   // throw away grid cells that intersect
   // with the parent polygon
-  var insideArray = [];
-  var boxes = array.length;
-  for (var box = 0; box < boxes; box ++) {
+  const insideArray = [];
+  const boxes = array.length;
+  for (let box = 0; box < boxes; box ++) {
     // iterate through point of box
-    var keep = true;
-    var corners = array[box].length;
+    let keep = true;
+    const corners = array[box].length;
     for (var corner = 0; corner < corners; corner ++) {
       if (pip(polygon, array[box][corner]) === 1) {
         keep = false;

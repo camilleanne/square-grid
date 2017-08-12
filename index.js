@@ -54,11 +54,11 @@ module.exports = function squareGrid(polygon, cellSize, noClip) {
   const cellHeight = yFraction * (north - south);
 
   // iterate over columns & rows
-  var currentX = west;
-  for (var column = 0; column < columns; column++) {
-    var currentY = south;
-    for (var row = 0; row < rows; row++) {
-      var cellPoly = [
+  let currentX = west;
+  for (let column = 0; column < columns; column++) {
+    let currentY = south;
+    for (let row = 0; row < rows; row++) {
+      const cellPoly = [
         [currentX, currentY],
         [currentX, currentY + cellHeight],
         [currentX + cellWidth, currentY + cellHeight],
@@ -81,7 +81,7 @@ function distance (from, to) {
 
 function makeBbox (array) {
   const bbox = [-Infinity, -Infinity, Infinity, Infinity];
-  for (var i = 0; i < array.length; i ++) {
+  for (let i = 0; i < array.length; i ++) {
     const coord = array[i];
     if (bbox[0] < coord[0]) bbox[0] = coord[0];
     if (bbox[1] < coord[1]) bbox[1] = coord[1];
@@ -96,9 +96,9 @@ function calculateIntersections(polygon, array) {
   // with the parent polygon
   const insideArray = [];
   const boxes = array.length;
-  for (var box = 0; box < boxes; box ++) {
+  for (let box = 0; box < boxes; box ++) {
     // iterate through point of box
-    var keep = true;
+    let keep = true;
     const corners = array[box].length;
     for (var corner = 0; corner < corners; corner ++) {
       if (pip(polygon, array[box][corner]) === 1) {

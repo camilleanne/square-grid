@@ -23,14 +23,15 @@ const pip = require('robust-point-in-polygon');
  *
  */
 
-module.exports = function squareGrid(polygon, cellSize, noClip) {
+module.exports = function squareGrid(polygon, cellSize, coordSystem, noClip) {
   const results = [];
 
   // validation
   if (!polygon) throw new Error('polygon is required');
   if (!Array.isArray(polygon) || !polygon.length) throw new Error('polygon must be an array of vertices');
+  if (polygon.length < 3) throw new Error('polygon array must have at least 3 vertices');
   if (!cellSize) throw new Error('cellSize is required');
-  const bbox = makeBbox(polygon); // Convert polygon to bbox
+  const bbox = makeBbox(polygon, coordSystem); // Convert polygon to bbox
 
   const west = bbox[0];
   const south = bbox[1];
@@ -38,8 +39,8 @@ module.exports = function squareGrid(polygon, cellSize, noClip) {
   const north = bbox[3];
 
   // distance
-  const xDistance = distance(west, east);
-  const yDistance = distance(south, north);
+  const xDistance = distance(west, east, coordSystem);
+  const yDistance = distance(south, north, coordSystem);
 
   // rows & columns
   const columns = Math.ceil(xDistance / cellSize);
@@ -75,18 +76,31 @@ module.exports = function squareGrid(polygon, cellSize, noClip) {
   return calculateIntersections(polygon, results);
 };
 
-function distance (from, to) {
-  return from - to;
+function distance (from, to, coordSystem) {
+  if (coordSystem === 'canvas') return from - to;
+  else return to - from;
 }
 
-function makeBbox (array) {
-  const bbox = [-Infinity, -Infinity, Infinity, Infinity];
-  for (var i = 0; i < array.length; i ++) {
-    const coord = array[i];
-    if (bbox[0] < coord[0]) bbox[0] = coord[0];
-    if (bbox[1] < coord[1]) bbox[1] = coord[1];
-    if (bbox[2] > coord[0]) bbox[2] = coord[0];
-    if (bbox[3] > coord[1]) bbox[3] = coord[1];
+function makeBbox (array, coordSystem) {
+  let bbox = [];
+  if (coordSystem === 'canvas') {
+    bbox = [-Infinity, -Infinity, Infinity, Infinity];
+    for (var i = 0; i < array.length; i ++) {
+      const coord = array[i];
+      if (bbox[0] < coord[0]) bbox[0] = coord[0];
+      if (bbox[1] < coord[1]) bbox[1] = coord[1];
+      if (bbox[2] > coord[0]) bbox[2] = coord[0];
+      if (bbox[3] > coord[1]) bbox[3] = coord[1];
+    }
+  } else {
+    bbox = [Infinity, Infinity, -Infinity, -Infinity];
+    for (var i = 0; i < array.length; i ++) {
+      const coord = array[i];
+      if (bbox[0] > coord[0]) bbox[0] = coord[0];
+      if (bbox[1] > coord[1]) bbox[1] = coord[1];
+      if (bbox[2] < coord[0]) bbox[2] = coord[0];
+      if (bbox[3] < coord[1]) bbox[3] = coord[1];
+    }
   }
   return bbox;
 };
@@ -110,3 +124,7 @@ function calculateIntersections(polygon, array) {
   }
   return insideArray;
 }
+
+module.exports.makeBbox = makeBbox;
+module.exports.distance = distance;
+module.exports.calculateIntersections = calculateIntersections;

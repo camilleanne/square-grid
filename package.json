@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node ./test/*.test.js",
+    "test": "tap ./test/*.test.js",
     "bench": "node ./test/*.benchmark.js"
   },
    "repository": {

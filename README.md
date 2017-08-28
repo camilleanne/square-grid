@@ -2,7 +2,9 @@
 
 creates a square grid from an arbitrary polygon. the grid can cover, or be inclusive of, the polygon.
 
-based on [@turf/square-grid](https://github.com/Turfjs/turf/tree/master/packages/turf-square-grid) but for use with arbitrary polygons, not just bounding boxes, and in Euclidean space, not Cartesian. For a square grid useful for geo applications, go to Turf.
+Note: this library currently assumes you are using the viewport coordinate system coordinate space (e.g. top-left is 0,0) such as used for canvas or SVG.
+
+based on [@turf/square-grid](https://github.com/Turfjs/turf/tree/master/packages/turf-square-grid) but for use with arbitrary polygons in the viewport coordinate system coordinate space, not just bounding boxes. For a square grid useful for geo applications, go to Turf.
 
 <img width="275" alt="screen shot 2017-08-08 at 12 18 12 pm" src="https://user-images.githubusercontent.com/3952537/29067962-1a81a3c6-7c35-11e7-8536-c382a841ed04.png"><img width="275" alt="screen shot 2017-08-08 at 12 17 42 pm" src="https://user-images.githubusercontent.com/3952537/29067963-1a9eb36c-7c35-11e7-8727-07ffed587aac.png">
 
@@ -37,3 +39,4 @@ To Do:
 * tests for internal functions
 * performance improvements for complex polygons
 * make build/browserify step for client-side
+* support multiple coordinate spaces (e.g. graph )

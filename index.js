@@ -12,14 +12,16 @@ const pip = require('robust-point-in-polygon');
  * @name squareGrid
  * @param {Array<number>} polygon in [[vertexLat, vertexLng], ... ] format
  * @param {number} cellSize width of each cell in pixels
+ * @param {string} coordSystem either 'cartesian' or 'canvas'
  * @param {boolean} noClip (optional) if false or missing squares that are not completely covered by the parent polygon are removed
  * @returns {Array<number>} grid a grid of square polygons in [[[vertexLat],[vertexLng], ... ]]
  * @example
  * var polygon = [[20,20], [60,20], [80,40], [10,40], [20,20]];
  * var cellSize = 2;
+ * var coordSystem = 'canvas';
  * var noClip = false;
  *
- * var squareGrid = turf.squareGrid(polygon, cellSize, noClip);
+ * var squareGrid = turf.squareGrid(polygon, cellSize, coordSystem, noClip);
  *
  */
 
@@ -31,6 +33,11 @@ module.exports = function squareGrid(polygon, cellSize, coordSystem, noClip) {
   if (!Array.isArray(polygon) || !polygon.length) throw new Error('polygon must be an array of vertices');
   if (polygon.length < 3) throw new Error('polygon array must have at least 3 vertices');
   if (!cellSize) throw new Error('cellSize is required');
+  if (coordSystem && (coordSystem !== 'cartesian' && coordSystem !== 'canvas')) {
+    throw new Error('coordSystem must be either `canvas` || `cartesian`');
+  }
+  if (!coordSystem) coordSystem = 'cartesian';
+
   const bbox = makeBbox(polygon, coordSystem); // Convert polygon to bbox
 
   const west = bbox[0];

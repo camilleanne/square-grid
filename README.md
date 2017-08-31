@@ -14,7 +14,7 @@ based on [@turf/square-grid](https://github.com/Turfjs/turf/tree/master/packages
 
 - `cellSize` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** width of each cell
 
--`coordSystem` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** either `canvas` or `cartesian` depending on whether the polygon is in [viewport coordinate system](https://www.w3.org/TR/SVG2/coords.html) coordinate space (e.g. top-left is 0,0) (e.g. for use with canvas or SVGs), or cartesian space (e.g. standard x,y graph stuff) (optional, default `cartesian`).
+- `coordSystem` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** either `canvas` or `cartesian` depending on whether the polygon is in [viewport coordinate system](https://www.w3.org/TR/SVG2/coords.html) coordinate space (e.g. top-left is 0,0) (e.g. for use with canvas or SVGs), or cartesian space (e.g. standard x,y graph stuff) (optional, default `cartesian`).
 
 - `noClip` **\[[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)]** if `true`, does not remove sample grid units to fit completely within given polygon (optional, default `false`)
 

@@ -17,9 +17,10 @@
   "keywords": [
     "grid",
     "sampling",
-    "grid",
     "polygon",
-    "euclidean"
+    "cartesian",
+    "viewport",
+    "canvas"
   ],
   "author": "Camille Teicheira",
   "license": "MIT",

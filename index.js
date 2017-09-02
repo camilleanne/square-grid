@@ -80,7 +80,7 @@ module.exports = function squareGrid(polygon, cellSize, coordSystem, noClip) {
   }
 
   if (noClip) return results 
-  return calculateIntersections(polygon, results);
+  return returnInterior(polygon, results);
 };
 
 function distance (from, to, coordSystem) {
@@ -112,7 +112,7 @@ function makeBbox (array, coordSystem) {
   return bbox;
 };
 
-function calculateIntersections(polygon, array) {
+function returnInterior(polygon, array) {
   // throw away grid cells that intersect
   // with the parent polygon
   const insideArray = [];
@@ -134,4 +134,4 @@ function calculateIntersections(polygon, array) {
 
 module.exports.makeBbox = makeBbox;
 module.exports.distance = distance;
-module.exports.calculateIntersections = calculateIntersections;
+module.exports.returnInterior = returnInterior;
